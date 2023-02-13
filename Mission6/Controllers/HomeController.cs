@@ -37,9 +37,16 @@ namespace Mission6.Controllers
         [HttpPost]
         public IActionResult MovieForm(MovieFormResponse ar)
         {
-            blahContext.Add(ar);
-            blahContext.SaveChanges();
-            return View();
+            if (ModelState.IsValid)
+            {
+                blahContext.Add(ar);
+                blahContext.SaveChanges();
+                return View("Confirmation", ar);
+            }
+            else
+            {
+                return View();
+            }
             // Confirmation page will be: return View("Confirmation", ar);
         }
 
